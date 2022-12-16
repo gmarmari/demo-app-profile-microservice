@@ -1,0 +1,79 @@
+package gmarmari.demo.microservices.profile.repositories;
+
+import gmarmari.demo.microservices.profile.entities.AddressDao;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.util.List;
+import java.util.Optional;
+
+import static gmarmari.demo.microservices.profile.CommonDataFactory.aText;
+import static gmarmari.demo.microservices.profile.ProfileDataFactory.aAddressDao;
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ActiveProfiles("test")
+@DataJpaTest
+class AddressRepositoryTest {
+
+    @Autowired
+    private AddressRepository repository;
+
+    @Autowired
+    private TestEntityManager entityManager;
+
+
+    @Test
+    void save_findById() {
+        // Given
+        AddressDao dao = aAddressDao();
+        Long id = entityManager.persistAndGetId(dao, Long.class);
+
+        // When
+        Optional<AddressDao> resultOptional = repository.findById(id);
+
+        // Then
+        assertThat(resultOptional).isPresent();
+        AddressDao result = resultOptional.get();
+
+        assertThat(result.getId()).isEqualTo(id);
+        assertThat(result.getUsername()).isEqualTo(dao.getUsername());
+        assertThat(result.getType()).isEqualTo(dao.getType());
+        assertThat(result.getName()).isEqualTo(dao.getName());
+        assertThat(result.getStreet()).isEqualTo(dao.getStreet());
+        assertThat(result.getPostalCode()).isEqualTo(dao.getPostalCode());
+        assertThat(result.getCity()).isEqualTo(dao.getCity());
+        assertThat(result.getState()).isEqualTo(dao.getState());
+        assertThat(result.getCountry()).isEqualTo(dao.getCountry());
+        assertThat(result.getTel()).isEqualTo(dao.getTel());
+    }
+
+    @Test
+    void save_findByUsername() {
+        // Given
+        String username = aText();
+        AddressDao dao = aAddressDao();
+        dao.setUsername(username);
+        entityManager.persist(dao);
+
+        // When
+        List<AddressDao> list = repository.findByUsername(username);
+
+        // Then
+        assertThat(list).hasSize(1);
+
+        assertThat(list.get(0).getUsername()).isEqualTo(dao.getUsername());
+        assertThat(list.get(0).getType()).isEqualTo(dao.getType());
+        assertThat(list.get(0).getName()).isEqualTo(dao.getName());
+        assertThat(list.get(0).getStreet()).isEqualTo(dao.getStreet());
+        assertThat(list.get(0).getPostalCode()).isEqualTo(dao.getPostalCode());
+        assertThat(list.get(0).getCity()).isEqualTo(dao.getCity());
+        assertThat(list.get(0).getState()).isEqualTo(dao.getState());
+        assertThat(list.get(0).getCountry()).isEqualTo(dao.getCountry());
+        assertThat(list.get(0).getTel()).isEqualTo(dao.getTel());
+    }
+
+
+}

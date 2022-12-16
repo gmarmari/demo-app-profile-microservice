@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  orders:
+    build: .
+    image: "demo-app-profile"
+    container_name: demo-app-profile
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://profile-database:5432/profiler"
+      SPRING_DATASOURCE_USERNAME: "profiler"
+      SPRING_DATASOURCE_PASSWORD: "12345"
+    volumes:
+      - "./log:/app/log"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - profile-database
+
+  orders-database:
+    image: "postgres:14.5-alpine"
+    container_name: profile-database
+    restart: "unless-stopped"
+    volumes:
+      - "db-data:/val/lib/postgres/data"
+    environment:
+      POSTGRES_USER: "profiler"
+      POSTGRES_PASSWORD: "12345"
+    ports:
+      - "5432:5432"
+
+volumes:
+  db-data:

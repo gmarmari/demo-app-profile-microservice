@@ -52,7 +52,6 @@ public class ProfileDataFactory {
                 salutation,
                 aText(),
                 aText(),
-                aText(),
                 aText()
         );
     }
@@ -125,7 +124,6 @@ public class ProfileDataFactory {
         dao.setFirstName(aText());
         dao.setLastName(aText());
         dao.setEmail(aText());
-        dao.setPassword(aText());
         return dao;
     }
 

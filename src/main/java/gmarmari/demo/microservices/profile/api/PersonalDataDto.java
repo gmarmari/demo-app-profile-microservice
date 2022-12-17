@@ -10,7 +10,7 @@ import java.util.Objects;
 @Schema(name = "PersonalData_V01")
 public class PersonalDataDto {
 
-    public static final PersonalDataDto EMPTY = new PersonalDataDto(-1, SalutationDto.NONE, "", "", "", "");
+    public static final PersonalDataDto EMPTY = new PersonalDataDto(-1, SalutationDto.NONE, "", "", "");
 
     public final long id;
 
@@ -29,22 +29,16 @@ public class PersonalDataDto {
     @Size(max = 100)
     public final String email;
 
-    @NotNull
-    @Size(max = 100)
-    public final String password;
-
     public PersonalDataDto(@JsonProperty("id") long id,
                            @JsonProperty("salutation") SalutationDto salutation,
                            @JsonProperty("firstName") String firstName,
                            @JsonProperty("lastName") String lastName,
-                           @JsonProperty("email") String email,
-                           @JsonProperty("password") String password) {
+                           @JsonProperty("email") String email) {
         this.id = id;
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
     }
 
     @Override
@@ -52,12 +46,12 @@ public class PersonalDataDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonalDataDto that = (PersonalDataDto) o;
-        return id == that.id && salutation == that.salutation && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(password, that.password);
+        return id == that.id && salutation == that.salutation && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, salutation, firstName, lastName, email, password);
+        return Objects.hash(id, salutation, firstName, lastName, email);
     }
 
     @Override
@@ -68,7 +62,6 @@ public class PersonalDataDto {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

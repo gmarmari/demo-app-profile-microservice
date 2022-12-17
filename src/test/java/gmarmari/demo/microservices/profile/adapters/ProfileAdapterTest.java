@@ -299,7 +299,6 @@ class ProfileAdapterTest {
         assertThat(dto.firstName).isEqualTo(dao.getFirstName());
         assertThat(dto.lastName).isEqualTo(dao.getLastName());
         assertThat(dto.email).isEqualTo(dao.getEmail());
-        assertThat(dto.password).isEqualTo(dao.getPassword());
     }
 
     private void verifyAddress(AddressDto dto, AddressDao dao) {

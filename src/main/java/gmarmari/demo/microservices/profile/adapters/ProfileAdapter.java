@@ -93,8 +93,7 @@ public class ProfileAdapter {
                 SalutationDto.valueOf(dao.getSalutation().name()),
                 dao.getFirstName(),
                 dao.getLastName(),
-                dao.getEmail(),
-                dao.getPassword()
+                dao.getEmail()
         );
     }
 
@@ -129,7 +128,6 @@ public class ProfileAdapter {
         dao.setFirstName(dto.firstName);
         dao.setLastName(dto.lastName);
         dao.setEmail(dto.email);
-        dao.setPassword(dto.password);
         return dao;
     }
 

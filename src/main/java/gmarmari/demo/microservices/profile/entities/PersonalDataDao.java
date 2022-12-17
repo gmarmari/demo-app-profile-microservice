@@ -30,8 +30,6 @@ public class PersonalDataDao {
     @NotNull
     private String email;
 
-    @NotNull
-    private String password;
 
     public long getId() {
         return id;
@@ -81,13 +79,6 @@ public class PersonalDataDao {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -111,7 +102,6 @@ public class PersonalDataDao {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package gmarmari.demo.microservices.profile;
 
+import gmarmari.demo.microservices.profile.api.*;
 import gmarmari.demo.microservices.profile.entities.*;
 
 import static gmarmari.demo.microservices.profile.CommonDataFactory.*;
@@ -10,6 +11,54 @@ public class ProfileDataFactory {
     private ProfileDataFactory() {
         // Hide constructor
     }
+
+    //region dto
+
+    public static AddressDto aAddressDto() {
+        int index = aInt(AddressTypeDto.values().length);
+        AddressTypeDto addressType = AddressTypeDto.values()[index];
+
+        return new AddressDto(
+                aLong(),
+                addressType,
+                aText(),
+                aText(),
+                aText(),
+                aText(),
+                aNullableText(),
+                aText(),
+                aNullableText()
+        );
+    }
+
+    public static PaymentMethodDto aPaymentMethodDto() {
+        int index = aInt(PaymentMethodTypeDto.values().length);
+        PaymentMethodTypeDto paymentMethodType = PaymentMethodTypeDto.values()[index];
+
+        return new PaymentMethodDto(
+                aLong(),
+                paymentMethodType,
+                aNullableText(),
+                aNullableText()
+        );
+    }
+
+    public static PersonalDataDto aPersonalDataDto() {
+        int index = aInt(SalutationDto.values().length);
+        SalutationDto salutation = SalutationDto.values()[index];
+
+        return new PersonalDataDto(
+                aLong(),
+                salutation,
+                aText(),
+                aText(),
+                aText(),
+                aText()
+        );
+    }
+
+    //endregion dto
+
 
     //region dao
 

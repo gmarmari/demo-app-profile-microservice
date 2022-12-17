@@ -31,7 +31,7 @@ A user can read / write / update / delete its personal data, addresses and payme
  
  If you need a database local you can use
  ```
- docker-compose up -d orders-database
+ docker-compose up -d profile-database
   ```
  
  Or use the "test" spring profile: 

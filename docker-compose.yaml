@@ -16,7 +16,7 @@ services:
     depends_on:
       - profile-database
 
-  orders-database:
+  profile-database:
     image: "postgres:14.5-alpine"
     container_name: profile-database
     restart: "unless-stopped"

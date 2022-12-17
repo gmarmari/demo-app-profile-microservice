@@ -1,10 +1,12 @@
 package gmarmari.demo.microservices.profile.repositories;
 
 import gmarmari.demo.microservices.profile.entities.AddressDao;
+import gmarmari.demo.microservices.profile.entities.AddressTypeDao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -54,25 +56,22 @@ class AddressRepositoryTest {
     void save_findByUsername() {
         // Given
         String username = aText();
-        AddressDao dao = aAddressDao();
-        dao.setUsername(username);
-        entityManager.persist(dao);
+
+        AddressDao daoA = aAddressDao();
+        daoA.setUsername(username);
+        daoA.setType(AddressTypeDao.SHIPPING);
+        entityManager.persist(daoA);
+
+        AddressDao daoB = aAddressDao();
+        daoB.setUsername(username);
+        daoB.setType(AddressTypeDao.BILLING);
+        entityManager.persist(daoB);
 
         // When
-        List<AddressDao> list = repository.findByUsername(username);
+        List<AddressDao> list = repository.findByUsername(username, Sort.by("type").ascending());
 
         // Then
-        assertThat(list).hasSize(1);
-
-        assertThat(list.get(0).getUsername()).isEqualTo(dao.getUsername());
-        assertThat(list.get(0).getType()).isEqualTo(dao.getType());
-        assertThat(list.get(0).getName()).isEqualTo(dao.getName());
-        assertThat(list.get(0).getStreet()).isEqualTo(dao.getStreet());
-        assertThat(list.get(0).getPostalCode()).isEqualTo(dao.getPostalCode());
-        assertThat(list.get(0).getCity()).isEqualTo(dao.getCity());
-        assertThat(list.get(0).getState()).isEqualTo(dao.getState());
-        assertThat(list.get(0).getCountry()).isEqualTo(dao.getCountry());
-        assertThat(list.get(0).getTel()).isEqualTo(dao.getTel());
+        assertThat(list).containsExactly(daoB, daoA);
     }
 
 

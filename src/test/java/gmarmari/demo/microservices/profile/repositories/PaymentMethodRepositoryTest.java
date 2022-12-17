@@ -1,10 +1,12 @@
 package gmarmari.demo.microservices.profile.repositories;
 
 import gmarmari.demo.microservices.profile.entities.PaymentMethodDao;
+import gmarmari.demo.microservices.profile.entities.PaymentMethodTypeDao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -49,20 +51,27 @@ class PaymentMethodRepositoryTest {
     void save_findByUsername() {
         // Given
         String username = aText();
-        PaymentMethodDao dao = aPaymentMethodDao();
-        dao.setUsername(username);
-        entityManager.persist(dao);
+
+        PaymentMethodDao daoA = aPaymentMethodDao();
+        daoA.setUsername(username);
+        daoA.setType(PaymentMethodTypeDao.PAYPAL);
+        entityManager.persist(daoA);
+
+        PaymentMethodDao daoB = aPaymentMethodDao();
+        daoB.setUsername(username);
+        daoB.setType(PaymentMethodTypeDao.CREDIT_CARD);
+        entityManager.persist(daoB);
+
+        PaymentMethodDao daoC = aPaymentMethodDao();
+        daoC.setUsername(username);
+        daoC.setType(PaymentMethodTypeDao.CASH_ON_DELIVERY);
+        entityManager.persist(daoC);
 
         // When
-        List<PaymentMethodDao> list = repository.findByUsername(username);
+        List<PaymentMethodDao> list = repository.findByUsername(username, Sort.by("type").ascending());
 
         // Then
-        assertThat(list).hasSize(1);
-
-        assertThat(list.get(0).getUsername()).isEqualTo(dao.getUsername());
-        assertThat(list.get(0).getType()).isEqualTo(dao.getType());
-        assertThat(list.get(0).getText1()).isEqualTo(dao.getText1());
-        assertThat(list.get(0).getText2()).isEqualTo(dao.getText2());
+        assertThat(list).containsExactly(daoC, daoB, daoA);
     }
 
 }

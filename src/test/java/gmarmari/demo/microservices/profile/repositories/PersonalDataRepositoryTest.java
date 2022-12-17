@@ -44,7 +44,6 @@ class PersonalDataRepositoryTest {
         assertThat(result.getFirstName()).isEqualTo(dao.getFirstName());
         assertThat(result.getLastName()).isEqualTo(dao.getLastName());
         assertThat(result.getEmail()).isEqualTo(dao.getEmail());
-        assertThat(result.getPassword()).isEqualTo(dao.getPassword());
     }
 
     @Test
@@ -67,7 +66,6 @@ class PersonalDataRepositoryTest {
         assertThat(result.getFirstName()).isEqualTo(dao.getFirstName());
         assertThat(result.getLastName()).isEqualTo(dao.getLastName());
         assertThat(result.getEmail()).isEqualTo(dao.getEmail());
-        assertThat(result.getPassword()).isEqualTo(dao.getPassword());
     }
 
 }

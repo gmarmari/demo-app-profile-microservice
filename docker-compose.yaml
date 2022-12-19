@@ -9,6 +9,10 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://profile-database:5432/profiler"
       SPRING_DATASOURCE_USERNAME: "profiler"
       SPRING_DATASOURCE_PASSWORD: "12345"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://demo-app-service-registry:8761/eureka
+    networks:
+      - default
+      - demo-app-network
     volumes:
       - "./log:/app/log"
     ports:
@@ -30,3 +34,7 @@ services:
 
 volumes:
   db-data:
+
+networks:
+  demo-app-network:
+    external: true

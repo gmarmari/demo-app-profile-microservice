@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/")
+@RequestMapping("/profile")
 @Tag(name = "Profile API", description = "User profile management API")
 public interface ProfileApi {
 

@@ -44,7 +44,7 @@ class ProfileRestControllerTest {
         when(adapter.getPersonalData(USER_NAME)).thenReturn(dto);
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/personal-data"));
+        ResultActions resultActions = mockMvc.perform(get("/profile/personal-data"));
 
         // Then
         resultActions.andExpect(status().isOk())
@@ -59,7 +59,7 @@ class ProfileRestControllerTest {
         when(adapter.getAddresses(USER_NAME)).thenReturn(list);
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/addresses"));
+        ResultActions resultActions = mockMvc.perform(get("/profile/addresses"));
 
         // Then
         resultActions.andExpect(status().isOk())
@@ -74,7 +74,7 @@ class ProfileRestControllerTest {
         when(adapter.getPaymentMethods(USER_NAME)).thenReturn(list);
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/payment-methods"));
+        ResultActions resultActions = mockMvc.perform(get("/profile/payment-methods"));
 
         // Then
         resultActions.andExpect(status().isOk())
@@ -90,7 +90,7 @@ class ProfileRestControllerTest {
         when(adapter.savePersonalData(dto, USER_NAME)).thenReturn(Response.OK);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/personal-data").
+        ResultActions resultActions = mockMvc.perform(post("/profile/personal-data").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
@@ -106,7 +106,7 @@ class ProfileRestControllerTest {
         when(adapter.savePersonalData(dto, USER_NAME)).thenReturn(Response.ERROR);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/personal-data").
+        ResultActions resultActions = mockMvc.perform(post("/profile/personal-data").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
@@ -122,7 +122,7 @@ class ProfileRestControllerTest {
         when(adapter.saveAddress(dto, USER_NAME)).thenReturn(Response.OK);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/addresses").
+        ResultActions resultActions = mockMvc.perform(post("/profile/addresses").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
@@ -138,7 +138,7 @@ class ProfileRestControllerTest {
         when(adapter.saveAddress(dto, USER_NAME)).thenReturn(Response.ERROR);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/addresses").
+        ResultActions resultActions = mockMvc.perform(post("/profile/addresses").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
@@ -154,7 +154,7 @@ class ProfileRestControllerTest {
         when(adapter.savePaymentMethod(dto, USER_NAME)).thenReturn(Response.OK);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/payment-methods").
+        ResultActions resultActions = mockMvc.perform(post("/profile/payment-methods").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
@@ -170,7 +170,7 @@ class ProfileRestControllerTest {
         when(adapter.savePaymentMethod(dto, USER_NAME)).thenReturn(Response.ERROR);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/payment-methods").
+        ResultActions resultActions = mockMvc.perform(post("/profile/payment-methods").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
@@ -185,7 +185,7 @@ class ProfileRestControllerTest {
         when(adapter.deleteAddress(addressId, USER_NAME)).thenReturn(Response.OK);
 
         // When
-        ResultActions resultActions = mockMvc.perform(delete("/addresses/{addressId}", addressId));
+        ResultActions resultActions = mockMvc.perform(delete("/profile/addresses/{addressId}", addressId));
 
         // Then
         resultActions.andExpect(status().isOk());
@@ -198,7 +198,7 @@ class ProfileRestControllerTest {
         when(adapter.deleteAddress(addressId, USER_NAME)).thenReturn(Response.ERROR);
 
         // When
-        ResultActions resultActions = mockMvc.perform(delete("/addresses/{addressId}", addressId));
+        ResultActions resultActions = mockMvc.perform(delete("/profile/addresses/{addressId}", addressId));
 
         // Then
         resultActions.andExpect(status().isInternalServerError());
@@ -211,7 +211,7 @@ class ProfileRestControllerTest {
         when(adapter.deletePaymentMethod(paymentMethodId, USER_NAME)).thenReturn(Response.OK);
 
         // When
-        ResultActions resultActions = mockMvc.perform(delete("/payment-methods/{paymentMethodId}", paymentMethodId));
+        ResultActions resultActions = mockMvc.perform(delete("/profile/payment-methods/{paymentMethodId}", paymentMethodId));
 
         // Then
         resultActions.andExpect(status().isOk());
@@ -224,7 +224,7 @@ class ProfileRestControllerTest {
         when(adapter.deletePaymentMethod(paymentMethodId, USER_NAME)).thenReturn(Response.ERROR);
 
         // When
-        ResultActions resultActions = mockMvc.perform(delete("/payment-methods/{paymentMethodId}", paymentMethodId));
+        ResultActions resultActions = mockMvc.perform(delete("/profile/payment-methods/{paymentMethodId}", paymentMethodId));
 
         // Then
         resultActions.andExpect(status().isInternalServerError());

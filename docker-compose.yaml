@@ -12,7 +12,7 @@ services:
     volumes:
       - "./log:/app/log"
     ports:
-      - "8003:8003"
+      - "8003:8080"
     depends_on:
       - profile-database
 

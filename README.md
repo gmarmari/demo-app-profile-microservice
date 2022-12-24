@@ -42,8 +42,8 @@ A user can read / write / update / delete its personal data, addresses and payme
  
  # Api Docu
  
- * http://localhost:8080/swagger-ui/index.html
- * http://localhost:8080//v3/api-docs/
+ * http://localhost:8003/swagger-ui/index.html
+ * http://localhost:8003//v3/api-docs/
  
  
 

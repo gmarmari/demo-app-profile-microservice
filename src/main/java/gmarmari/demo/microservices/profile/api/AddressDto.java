@@ -42,7 +42,7 @@ public class AddressDto {
     public final String country;
 
     @Nullable
-    @Size(max = 100)
+    @Size(max = 32)
     public final String tel;
 
     public AddressDto(@JsonProperty("id") long id,

@@ -3,6 +3,8 @@ package gmarmari.demo.microservices.profile.adapters;
 import gmarmari.demo.microservices.profile.api.*;
 import gmarmari.demo.microservices.profile.entities.*;
 import gmarmari.demo.microservices.profile.services.ProfileService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProfileAdapter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProfileAdapter.class);
 
     private final ProfileService service;
 
@@ -42,6 +46,7 @@ public class ProfileAdapter {
             service.savePersonalData(convert(personalData, username));
             return Response.OK;
         } catch (Exception e) {
+            LOGGER.error("Error saving personal data", e);
             return Response.ERROR;
         }
 
@@ -52,6 +57,7 @@ public class ProfileAdapter {
             service.saveAddress(convert(address, username));
             return Response.OK;
         } catch (Exception e) {
+            LOGGER.error("Error saving address", e);
             return Response.ERROR;
         }
     }
@@ -61,6 +67,7 @@ public class ProfileAdapter {
             service.savePaymentMethod(convert(paymentMethod, username));
             return Response.OK;
         } catch (Exception e) {
+            LOGGER.error("Error saving payment method", e);
             return Response.ERROR;
         }
     }
@@ -70,6 +77,7 @@ public class ProfileAdapter {
             service.deleteAddress(addressId, username);
             return Response.OK;
         } catch (Exception e) {
+            LOGGER.error("Error deleting address with id " + addressId, e);
             return Response.ERROR;
         }
     }
@@ -79,6 +87,7 @@ public class ProfileAdapter {
             service.deletePaymentMethod(paymentMethodId, username);
             return Response.OK;
         } catch (Exception e) {
+            LOGGER.error("Error deleting payment method with id " + paymentMethodId, e);
             return Response.ERROR;
         }
     }
